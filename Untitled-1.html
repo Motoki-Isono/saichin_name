@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>磯野元希</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background: url('picture.jpg') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+    }
+
+    .cool-text {
+      font-size: 64px;
+      font-weight: bold;
+      background: linear-gradient(120deg, #00f0ff, #a200ff, #00ff8c);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s infinite alternate;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.5s ease, text-shadow 0.3s ease;
+      opacity: 0;
+      animation-fill-mode: forwards;
+      cursor: pointer;
+    }
+
+    .fade-in {
+      animation: fadeInScale 2s ease-out forwards;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .cool-text:hover {
+        transform: scale(1.05);
+        text-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .cool-text.rotate {
+        transform: rotateY(360deg);
+      }
+    }
+
+    @keyframes shine {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.8) rotateX(90deg);
+        text-shadow: none;
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotateX(0deg);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="cool-text fade-in" id="coolText">さいちん_picture</div>
+
+  <script>
+    const text = document.getElementById('coolText');
+
+    text.addEventListener('animationend', () => {
+      text.classList.remove('fade-in');
+      text.style.opacity = '1';
+    });
+
+    text.addEventListener('click', () => {
+      if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+        text.classList.toggle('rotate');
+      }
+    });
+  </script>
+</body>
+</html>
